@@ -16,7 +16,7 @@ Goal: one manifest produces working, signed APT and RPM repositories on a local 
 
 - Manifest parsing, defaults, validation, JSON Schema
 - Catalog: `ubuntu-22.04`, `ubuntu-24.04`, `debian-12`, `debian-13`, `rocky-9`, `almalinux-9`
-- Container-based resolution for APT and RPM
+- Dependency resolution in Go for APT and RPM, checked nightly against `apt` and `dnf`
 - Download, upstream signature verification, content-addressed pool
 - APT and RPM metadata subsetting and signing
 - `packtrix.lock`
@@ -48,7 +48,7 @@ Goal: one manifest produces working, signed APT and RPM repositories on a local 
 
 - Kubernetes: a `CronJob` example first; an operator only if real users need it
 - Bundles as OCI artifacts, to travel through registries next to container images
-- In-process resolver (libsolv) for build machines without a container runtime
+- A libsolv-based resolver, if the built-in closure meets cases it can't handle
 - Locally built packages added to the output (`createrepo_c`)
 - Organization catalogs
 
