@@ -1,6 +1,11 @@
-# Packtrix
+<h1 align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/assets/logo/packtrix-logo-dark.svg">
+    <img alt="Packtrix" src="docs/assets/logo/packtrix-logo.svg" width="360">
+  </picture>
+</h1>
 
-**Declarative offline APT and RPM repositories.**
+<p align="center"><strong>Declarative offline APT and RPM repositories.</strong></p>
 
 List the packages your air-gapped Linux machines need. Packtrix resolves every dependency for every distro you run, then builds signed APT and RPM repositories you can carry across the air gap.
 
@@ -89,6 +94,8 @@ $ packtrix validate -f examples/mixed-fleet.yaml -o yaml   # print it with every
 Packtrix doesn't mirror whole distributions, cache packages for connected networks, build packages, or handle container images. See [what Packtrix is not](docs/overview.md#what-packtrix-is-not).
 
 ## Documentation
+
+The documentation is also on the website: **[packtrix.github.io](https://packtrix.github.io/)**.
 
 | Document | Contents |
 |---|---|

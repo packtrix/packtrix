@@ -19,6 +19,7 @@ $ make build                        # build bin/packtrix; GOOS=linux GOARCH=arm6
 $ go test ./...                     # run the tests
 $ make lint                         # golangci-lint, configured in .golangci.yml
 $ make update-codegen               # regenerate zz_generated.*.go after changing API types
+$ make site-serve                   # preview the website at http://localhost:1313/
 ```
 
 The code is organized as follows:
@@ -32,6 +33,7 @@ The code is organized as follows:
 | `pkg/apis/packtrix/scheme/` | Registers every API version |
 | `pkg/apis/packtrix/validation/` | Validation of the internal API |
 | `pkg/apis/packtrix/manifest/` | Reading and writing manifest files |
+| `site/` | The website: a Hugo site that renders `docs/` and adds the landing page |
 
 A change to the manifest format changes the types in both `pkg/apis/packtrix/` and `v1alpha1/`. Defaults go in `v1alpha1/defaults.go` as `SetDefaults_<Type>` functions. Then run `make update-codegen` and commit the generated files; pull requests check that they are up to date. Never edit `zz_generated.*.go` by hand.
 
@@ -41,7 +43,8 @@ The files in `examples/` are loaded by the tests, so they must always stay valid
 
 `main` is protected:
 
-- Every change goes through a **pull request**. Direct pushes, force pushes and branch deletion are blocked.
+- Every change goes through a **pull request** from a fork. Direct pushes, force pushes and branch deletion are blocked.
+- The checks `pull-boilerplate`, `pull-verify-codegen` and `pull-lint` must pass.
 - Pull requests are **squash-merged**, so each one becomes a single commit on `main`.
 - All review conversations must be resolved before merging.
 
@@ -57,9 +60,15 @@ fix: reject targets that mix releases
 
 Common prefixes: `docs`, `feat`, `fix`, `refactor`, `test`, `ci`, `chore`.
 
-### Branches
+### Forks and branches
 
-Name branches after the change, e.g. `docs/baseline-explanation` or `feat/catalog-rocky-10`. Branches are deleted automatically after merging.
+`packtrix/packtrix` only has `main`: nobody can create branches in it, maintainers included. To contribute:
+
+1. Fork the repository.
+2. Push a branch to your fork, named after the change, e.g. `docs/baseline-explanation` or `feat/catalog-rocky-10`.
+3. Open a pull request against `main`, with **Allow edits by maintainers** checked.
+
+If your pull request depends on another one, base it on `main` anyway and say so in its description.
 
 ## License
 
